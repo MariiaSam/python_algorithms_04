@@ -1,46 +1,32 @@
-'''
-Ваше завдання - розробити функцію total_salary(path), яка аналізує цей файл і повертає загальну та середню суму заробітної плати всіх розробників.
-
-
-
-Вимоги до завдання:
-
-Функція total_salary(path) має приймати один аргумент - шлях до текстового файлу (path).
-Файл містить дані про заробітні плати розробників, розділені комами. Кожен рядок вказує на одного розробника.
-Функція повинна аналізувати файл, обчислювати загальну та середню суму заробітної плати.
-Результатом роботи функції є кортеж із двох чисел: загальної суми зарплат і середньої заробітної плати.
-
-
-Рекомендації для виконання:
-
-Використовуйте менеджер контексту with для читання файлів.
-Пам'ятайте про встановлення кодування при відкриті файлів
-Для розділення даних у кожному рядку можна застосувати метод split(',').
-Обрахуйте загальну суму заробітної плати, а потім розділіть її на кількість розробників, щоб отримати середню зарплату.
-Опрацьовуйте можливі винятки при роботі з файлами, такі як відсутність файлу.
-
-
-Критерії оцінювання:
-
-Функція повинна точно обчислювати загальну та середню суми.
-Повинна бути обробка випадків, коли файл відсутній або пошкоджений.
-Код має бути чистим, добре структурованим і зрозумілим.
-'''
-
-
-
-# total, average = total_salary("path/to/salary_file.txt")
-# print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")
-
 from pathlib import Path
 
-file_name = Path('Task_1/salary_data.txt')
 
-try:
-    with open(file_name, 'r', encoding='utf-8') as file:
-        for line in file:
-            print(line, end='')
-    
-except Exception as e:
-    print(f'{e} with file')
+path = Path('Task_1/salary_file.txt')
 
+
+def total_salary(path: str) -> str:
+
+    total = 0
+    number_of_developers = 0
+
+    try:
+        with open(path, 'r', encoding='utf-8') as file:
+            for line in file:
+                name, salary = line.strip().split(',')
+                total += int(salary)
+                number_of_developers += 1
+
+    except FileNotFoundError:
+        return "File not found"
+
+    except Exception as e:
+        print(f'{e} with file')
+
+    if  number_of_developers > 0:
+        average = total // number_of_developers
+        return f'Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}'
+    else:
+        print('У файлі відсутня інформація стосовно заробітної плати розробників ')
+
+
+print(total_salary('Task_1/salary_file.txt'))
