@@ -22,11 +22,13 @@ def total_salary(path: str) -> str:
     except Exception as e:
         print(f'{e} with file')
 
-    if  number_of_developers > 0:
+    if number_of_developers > 0:
         average = total // number_of_developers
-        return f'Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}'
+        return total, average
     else:
-        print('У файлі відсутня інформація стосовно заробітної плати розробників ')
+        print('У файлі відсутня інформація стосовно заробітної плати розробників')
+        return 0, 0
 
 
-print(total_salary('Task_1/salary_file.txt'))
+total, average = total_salary('Task_1/salary_file.txt')
+print(f'Загальна сума заробітної плати: {int(total)}, Середня заробітна плата: {int(average)}')
