@@ -2,7 +2,7 @@ from pathlib import Path
 
 path = Path('Task_2/cats_file.txt')
 
-def get_cats_info(path):
+def get_cats_info(path: list) -> list[dict]:
 
     cats_list = []
 
