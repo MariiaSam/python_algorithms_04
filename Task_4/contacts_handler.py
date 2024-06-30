@@ -22,7 +22,6 @@ def show_phone(contacts, name):
 
 def show_all(contacts):
     if contacts:
-        for name, phone in contacts.items():
-            return '\n'.join(f'{name}: {phone}')
+        return '\n'.join(f'{name}: {phone}' for name, phone in contacts.items())
     else:
         return 'Contact was not found.'
