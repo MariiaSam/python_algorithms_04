@@ -12,7 +12,7 @@ def total_salary(path: str) -> str:
     try:
         with open(path, 'r', encoding='utf-8') as file:
             for line in file:
-                name, salary = line.strip().split(',')
+                _, salary = line.strip().split(',')
                 total += int(salary)
                 number_of_developers += 1
 
